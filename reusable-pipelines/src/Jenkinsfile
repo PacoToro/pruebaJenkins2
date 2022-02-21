@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    environment {
+        VERSION="0.0.1"
+        VERSION_RC="rc.2"
+    }
+
+    stages {
+
+        stage('Audit tools') {
+            steps {
+                sh '''
+                    git version
+                    docker version
+                    dotnet --list-sdks
+                    dotnet --list-runtimes
+                '''
+            }
+        }
+
+        // stage('Build') {
+        //     steps {
+        //         echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
+        //     }
+        // }
+
+        // stage('Test') {
+        //     steps {
+        //         echo "Testing release ${RELEASE}"
+        //     }
+        // }
+
+        // stage('Smoke Test') {
+            
+        // }
+
+    }
+}
