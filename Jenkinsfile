@@ -22,5 +22,26 @@ pipeline {
                 echo "Testing release ${RELEASE}"
             }
         }
+
+        stage('Deploy') {
+            input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                }
+
+                steps {
+                    echo "Deployin release ${RELEASE} to ${TARGET_ENVIRONMENT}"
+                }
+            }
+        }
     }
+
+    post {
+        always {
+            echo "Prints wether deploy happend or not, success or failure"            
+        }
+    }
+
 }
